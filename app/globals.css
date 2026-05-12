@@ -165,21 +165,6 @@
     .hero-grid {
       grid-template-columns: 1fr;
       gap: 32px;
-      text-align: center;
-    }
-    /* Make text column a centered flex column */
-    .hero-grid > div:first-child {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    /* Force all direct children to full width for text-align center */
-    .hero-grid > div:first-child > * {
-      width: 100%;
-    }
-    /* Keep terminal inner text left-aligned */
-    .hero-grid > div:first-child > div:last-child {
-      text-align: left;
     }
     /* Center photo */
     .hero-grid > div:last-child {
@@ -187,6 +172,45 @@
       flex-direction: column;
       align-items: center;
     }
+     
+    /* center left content */
+.hero-grid > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-grid > div:first-child p,
+.hero-grid > div:first-child h1 {
+  text-align: center;
+}
+
+.hero-grid > div:first-child > div {
+  justify-content: center;
+}
+
+/* Center only terminal box, not terminal text */
+.hero-grid .terminal,
+.hero-grid .terminal * {
+  text-align: left !important;
+}
+.terminal {
+  width: 100%;
+  max-width: 70vw !important;
+}
+
+.hero-grid .terminal {
+  align-self: center;
+}
+
+/* Center photo */
+.hero-grid > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
     .exp-grid { grid-template-columns: 1fr; gap: 16px; }
 
     .contact-box {

@@ -14,7 +14,7 @@ const sans = Space_Grotesk({
 });
 
 export const metadata = {
-  title: 'Nikoloz Koiava — DevOps Engineer',
+  title: 'Nikoloz Koiava',
   description: 'IT Support Specialist transitioning into DevOps Engineering.',
 };
 

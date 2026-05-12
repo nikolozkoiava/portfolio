@@ -202,11 +202,16 @@ export default function Hero() {
     }
 
     if (cmd === 'uptime') {
-      var days = Math.floor((Date.now() - new Date('2025-01-01')) / 86400000);
-      setHistory((prev) => [...prev, { command: cmd, output: 'up ' + days + ' days, mass-automating since 2025' }]);
-      setCommand('');
-      return;
+  setHistory((prev) => [
+    ...prev,
+    {
+      command: cmd,
+      output: 'up for countless hours, automating since 2025'
     }
+  ]);
+  setCommand('');
+  return;
+}
 
     if (cmd === 'neofetch') {
       setHistory((prev) => [...prev, { command: cmd, output: '  NK  nikoloz@portfolio\n  --  OS: Web/Next.js 15\n      Shell: zsh 5.9\n      Terminal: browser\n      Theme: cosmic-amber\n      Status: 🟢 online' }]);
@@ -345,82 +350,179 @@ export default function Hero() {
             </motion.div>
 
             {showTerminal && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                onClick={focusInput}
-                style={{
-                  background: '#0d0d0d', border: '1px solid #222',
-                  borderRadius: 8, overflow: 'hidden', maxWidth: 480,
-                  cursor: 'text',
-                }}
-              >
-                <div style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  padding: '8px 16px', borderBottom: '1px solid #222', background: '#111',
-                }}>
-                  <div style={{ display: 'flex', gap: 6 }}>
-                    <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#333' }} />
-                    <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#333' }} />
-                    <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#333' }} />
-                  </div>
-                  <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: '#555' }}>~ — zsh — 80×8</span>
-                  <span style={{
-                    fontFamily: 'var(--mono)', fontSize: 11, color: '#555',
-                    border: '1px solid #333', padding: '1px 6px', borderRadius: 3,
-                  }}>tmux:0</span>
-                </div>
+  <motion.div
+    className="terminal"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    onClick={focusInput}
+    style={{
+      background: '#0d0d0d',
+      border: '1px solid #222',
+      borderRadius: 8,
+      overflow: 'hidden',
+      maxWidth: 480,
+      cursor: 'text',
+      position: 'relative',
+      zIndex: 100,
+    }}
+  >
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '8px 16px',
+        borderBottom: '1px solid #222',
+        background: '#111',
+      }}
+    >
+      <div style={{ display: 'flex', gap: 6 }}>
+        <span
+          style={{
+            width: 12,
+            height: 12,
+            borderRadius: '50%',
+            background: '#333',
+          }}
+        />
+        <span
+          style={{
+            width: 12,
+            height: 12,
+            borderRadius: '50%',
+            background: '#333',
+          }}
+        />
+        <span
+          style={{
+            width: 12,
+            height: 12,
+            borderRadius: '50%',
+            background: '#333',
+          }}
+        />
+      </div>
 
-                <div style={{ padding: 16, fontFamily: 'var(--mono)', fontSize: 13 }}>
-                  <p style={{ color: '#888' }}>
-                    <span style={{ color: '#f59e0b' }}>$</span> cat about.yml
-                  </p>
+      <span
+        style={{
+          fontFamily: 'var(--mono)',
+          fontSize: 11,
+          color: '#555',
+        }}
+      >
+        ~ — zsh — 80×8
+      </span>
 
-                  {TERMINAL_LINES.map((line, i) => (
-                    <TerminalLine key={line.key} line={line} delay={400 + i * 700} />
-                  ))}
+      <span
+        style={{
+          fontFamily: 'var(--mono)',
+          fontSize: 11,
+          color: '#555',
+          border: '1px solid #333',
+          padding: '1px 6px',
+          borderRadius: 3,
+        }}
+      >
+        tmux:0
+      </span>
+    </div>
 
-                  <p style={{ color: '#444', fontSize: 11, marginTop: 4 }}># last updated 2026-05-10</p>
+    <div
+      style={{
+        padding: 16,
+        fontFamily: 'var(--mono)',
+        fontSize: 13,
+      }}
+    >
+      <p style={{ color: '#888' }}>
+        <span style={{ color: '#f59e0b' }}>$</span> cat about.yml
+      </p>
 
-                  <div
-                    ref={historyRef}
-                    style={{ maxHeight: 170, overflowY: 'auto', overflowX: 'hidden', paddingRight: 6 }}
-                  >
-                    {history.map((item, index) => (
-                      <div key={index}>
-                        <p style={{ color: '#ccc' }}>
-                          <span style={{ color: '#f59e0b' }}>$</span> {item.command}
-                        </p>
-                        <p style={{ color: '#888', marginLeft: 16 }}>{item.output}</p>
-                      </div>
-                    ))}
+      {TERMINAL_LINES.map((line, i) => (
+        <TerminalLine
+          key={line.key}
+          line={line}
+          delay={400 + i * 700}
+        />
+      ))}
 
-                    <p style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <span style={{ color: '#f59e0b' }}>$</span>
-                      <input
-                        ref={inputRef}
-                        value={command}
-                        onChange={(e) => setCommand(e.target.value)}
-                        onKeyDown={runCommand}
-                        autoComplete="off"
-                        spellCheck="false"
-                        style={{
-                          flex: 1, background: 'transparent', border: 'none', outline: 'none',
-                          color: '#ccc', fontFamily: 'var(--mono)', fontSize: 13, caretColor: '#f59e0b',
-                        }}
-                      />
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
+      <p
+        style={{
+          color: '#444',
+          fontSize: 11,
+          marginTop: 4,
+        }}
+      >
+        # last updated 2026-05-10
+      </p>
+
+      <div
+        ref={historyRef}
+        style={{
+          maxHeight: 170,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          paddingRight: 6,
+        }}
+      >
+        {history.map((item, index) => (
+          <div key={index}>
+            <p style={{ color: '#ccc' }}>
+              <span style={{ color: '#f59e0b' }}>$</span>{' '}
+              {item.command}
+            </p>
+
+            <p
+              style={{
+                color: '#888',
+                marginLeft: 16,
+              }}
+            >
+              {item.output}
+            </p>
+          </div>
+        ))}
+
+        <p
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+          }}
+        >
+          <span style={{ color: '#f59e0b' }}>$</span>
+
+          <input
+            ref={inputRef}
+            value={command}
+            onChange={(e) => setCommand(e.target.value)}
+            onKeyDown={runCommand}
+            autoComplete="off"
+            spellCheck="false"
+            style={{
+              flex: 1,
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              color: '#ccc',
+              fontFamily: 'var(--mono)',
+              fontSize: 13,
+              caretColor: '#f59e0b',
+            }}
+          />
+        </p>
+      </div>
+    </div>
+  </motion.div>
+)}
           </div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
+            style={{ display: 'flex', flexDirection: 'column' }}
           >
             <div
               className="photo-frame"
