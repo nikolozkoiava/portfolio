@@ -1,4 +1,4 @@
-# 🚀 Nikoloz Koiava — Portfolio
+# Nikoloz Koiava — Portfolio
 
 Personal portfolio website built with Next.js, featuring a cosmic terminal-themed design with interactive animations.
 
