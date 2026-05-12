@@ -58,6 +58,4 @@ Open [http://localhost:3000](http://localhost:3000)
 - **LinkedIn:** [/in/nikolozkoiava](https://www.linkedin.com/in/nikolozkoiava/)
 - **GitHub:** [nikolozkoiava](https://github.com/nikolozkoiava)
 
----
 
-Built with curiosity & caffeine ☕
